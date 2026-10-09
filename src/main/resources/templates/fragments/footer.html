@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<footer class="footer" th:fragment="footer(showCta)">
+    <div class="container">
+
+        <div class="footer-cta glass" th:if="${showCta}">
+            <div>
+                <span class="label">Available for new opportunities</span>
+                <h2>Have a role or a project in mind?</h2>
+                <p>Full-time role, freelance build or AI integration — let's talk.</p>
+            </div>
+            <div class="footer-cta-actions">
+                <a th:href="@{/#contact}" class="btn btn-primary">Start a conversation <i class="fa-solid fa-arrow-right"></i></a>
+                <a th:if="${!#strings.isEmpty(profile.linkedinUrl)}" th:href="${profile.linkedinUrl}"
+                   target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="footer-grid">
+            <div>
+                <h4>// System Architecture</h4>
+                <div>Full-Stack Web Engineering</div>
+                <div>Java · Spring Boot · React</div>
+                <div>AI &amp; Machine Learning Solutions</div>
+            </div>
+            <div class="center">
+                <h4>// Status</h4>
+                <div class="ok"><span class="dot"></span> Open to Opportunities</div>
+                <div><a th:href="@{/#projects}">View Work ↗</a></div>
+                <div><a th:href="${'mailto:' + profile.email}" th:text="${profile.email}">email</a></div>
+            </div>
+            <div class="right">
+                <h4>// Region</h4>
+                <div th:text="${profile.location}">New Delhi, India</div>
+                <div>IST (UTC+5:30)</div>
+                <div class="socials">
+                    <a th:href="${profile.githubUrl}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a th:if="${!#strings.isEmpty(profile.linkedinUrl)}" th:href="${profile.linkedinUrl}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a th:if="${!#strings.isEmpty(profile.leetcodeUrl)}" th:href="${profile.leetcodeUrl}" target="_blank" rel="noopener" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a>
+                    <a th:href="${'mailto:' + profile.email}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-giant" aria-hidden="true" th:text="${profile.name}">Akash Singh</div>
+    </div>
+
+    <div class="container footer-bottom">
+        <span>© <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2026</span>
+            <span th:text="${profile.name}">Akash Singh</span>. All rights reserved.</span>
+        <span>Built with Java · Spring Boot · Thymeleaf</span>
+    </div>
+</footer>
+
+</body>
+</html>

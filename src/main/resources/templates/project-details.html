@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${(project.seoTitle != null ? project.seoTitle : project.title) + ' — Case study | ' + profile.name}">Project | Akash Singh</title>
+    <meta name="description" th:content="${project.seoDescription != null ? project.seoDescription : project.shortDescription}">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" th:content="${project.title + ' | ' + profile.name}">
+    <meta property="og:description" th:content="${project.shortDescription}">
+    <meta property="og:image" th:content="${profile.avatarUrl}">
+
+    <th:block th:replace="~{fragments/nav :: assets}"></th:block>
+</head>
+
+<body class="page-detail">
+
+<header th:replace="~{fragments/nav :: nav}"></header>
+
+<main class="detail">
+
+    <section class="detail-hero">
+        <div class="container detail-hero-grid">
+            <div class="detail-intro">
+                <a th:href="@{/#projects}" class="back"><i class="fa-solid fa-arrow-left"></i> All projects</a>
+
+                <div class="project-meta">
+                    <span class="label" th:text="${'// ' + project.category}">// Full Stack</span>
+                    <span class="status" th:if="${project.projectStatus}" th:text="${project.projectStatus}">Completed</span>
+                </div>
+
+                <h1 th:text="${project.title}">Project</h1>
+                <p class="detail-lead" th:text="${project.shortDescription}">Short description</p>
+
+                <div class="hero-cta">
+                    <a th:if="${!#strings.isEmpty(project.githubUrl)}" th:href="${project.githubUrl}" target="_blank" rel="noopener" class="btn btn-primary">
+                        <i class="fa-brands fa-github"></i> View Source Code
+                    </a>
+                    <a th:if="${!#strings.isEmpty(project.liveUrl)}" th:href="${project.liveUrl}" target="_blank" rel="noopener" class="btn btn-secondary">
+                        Live Demo ↗
+                    </a>
+                    <a th:href="@{/#contact}" class="btn btn-secondary">Discuss a Similar Project</a>
+                </div>
+            </div>
+
+            <div class="detail-cover">
+                <div th:replace="~{fragments/cover :: cover(${project})}"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <dl class="facts glass">
+                <div th:if="${project.role}"><dt>Role</dt><dd th:text="${project.role}">Developer</dd></div>
+                <div th:if="${project.duration}"><dt>Duration</dt><dd th:text="${project.duration}">3 months</dd></div>
+                <div th:if="${project.client}"><dt>Client</dt><dd th:text="${project.client}">Client</dd></div>
+                <div><dt>Category</dt><dd th:text="${project.category}">Full Stack</dd></div>
+                <div><dt>Stack</dt><dd th:text="${#lists.size(technologies) + ' technologies'}">10 technologies</dd></div>
+            </dl>
+        </div>
+    </section>
+
+    <section class="container" th:if="${!#lists.isEmpty(gallery)}">
+        <div class="gallery">
+            <img th:each="img : ${gallery}" th:src="@{'/uploads/' + ${img}}" th:alt="${project.title + ' screenshot'}" loading="lazy">
+        </div>
+    </section>
+
+    <section class="container" th:if="${!#strings.isEmpty(project.demoVideo)}">
+        <video class="demo-video" controls preload="metadata">
+            <source th:src="@{'/uploads/' + ${project.demoVideo}}">
+        </video>
+    </section>
+
+    <section class="container detail-grid">
+        <article class="detail-main">
+            <div class="detail-block" th:if="${project.description}">
+                <h2>Overview</h2>
+                <p class="pre" th:text="${project.description}">Description</p>
+            </div>
+
+            <div class="detail-block" th:if="${!#lists.isEmpty(features)}">
+                <h2>Key Features</h2>
+                <ul class="checklist">
+                    <li th:each="f : ${features}"><i class="fa-solid fa-check"></i><span th:text="${f}">Feature</span></li>
+                </ul>
+            </div>
+
+            <div class="detail-two" th:if="${project.challenges != null or project.solution != null}">
+                <div class="detail-block card glass" th:if="${project.challenges}">
+                    <h2><i class="fa-solid fa-triangle-exclamation"></i> Challenge</h2>
+                    <p class="pre" th:text="${project.challenges}">Challenge</p>
+                </div>
+                <div class="detail-block card glass" th:if="${project.solution}">
+                    <h2><i class="fa-solid fa-lightbulb"></i> Solution</h2>
+                    <p class="pre" th:text="${project.solution}">Solution</p>
+                </div>
+            </div>
+
+            <div class="detail-block" th:if="${project.futureScope}">
+                <h2>What's Next</h2>
+                <p class="pre" th:text="${project.futureScope}">Future scope</p>
+            </div>
+        </article>
+
+        <aside class="detail-side">
+            <div class="side-card glass">
+                <h3>// Tech stack</h3>
+                <ul class="tech">
+                    <li th:each="t : ${technologies}" th:text="${t}">Java</li>
+                </ul>
+            </div>
+            <div class="side-card glass" th:if="${!#strings.isEmpty(project.githubUrl)}">
+                <h3>// Repository</h3>
+                <a th:href="${project.githubUrl}" target="_blank" rel="noopener" class="repo-link">
+                    <i class="fa-brands fa-github"></i>
+                    <span th:text="${#strings.substringAfter(project.githubUrl, 'github.com/')}">user/repo</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square ext"></i>
+                </a>
+            </div>
+        </aside>
+    </section>
+
+    <section class="container more-projects" th:if="${!#lists.isEmpty(otherProjects)}">
+        <div class="more-head">
+            <h2>More Projects</h2>
+            <a th:href="@{/#projects}" class="link">View all <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="mini-grid">
+            <a class="mini-card glass" th:each="p : ${otherProjects}" th:href="@{'/project/' + ${p.slug}}">
+                <span class="tag" th:text="${p.category}">Full Stack</span>
+                <strong th:text="${p.title}">Project</strong>
+                <p th:text="${p.shortDescription}">Short description</p>
+                <span class="link">Read case study <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/footer :: footer(true)}"></footer>
+
+<script th:src="@{/js/portfolio.js}"></script>
+</body>
+</html>

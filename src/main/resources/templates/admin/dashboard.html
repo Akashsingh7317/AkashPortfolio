@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<div class="d-flex">
+
+    <!-- ========================= -->
+    <!-- Sidebar -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h3>Portfolio CMS</h3>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a th:href="@{/admin/dashboard}">
+
+                    <i class="bi bi-speedometer2"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/admin/projects}">
+
+                    <i class="bi bi-kanban"></i>
+
+                    Projects
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/admin/skills}">
+
+                    <i class="bi bi-code-slash"></i>
+
+                    Skills
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/admin/experience}">
+
+                    <i class="bi bi-briefcase"></i>
+
+                    Experience
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/admin/certificates}">
+
+                    <i class="bi bi-award"></i>
+
+                    Certificates
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/contact/admin/list}">
+
+                    <i class="bi bi-envelope"></i>
+
+                    Messages
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/admin/profile}">
+
+                    <i class="bi bi-person-circle"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a th:href="@{/admin/logout}">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- Main Content -->
+    <!-- ========================= -->
+
+    <main class="content">
+
+        <div class="container-fluid">
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+
+                <h2>
+
+                    Dashboard
+
+                </h2>
+
+                <span>
+
+                    Welcome Admin 👋
+
+                </span>
+
+            </div>
+
+            <!-- Dashboard Cards -->
+
+            <div class="row mt-4">
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-kanban-fill"></i>
+
+                        <h3 th:text="${totalProjects}">0</h3>
+
+                        <p>Total Projects</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-code-square"></i>
+
+                        <h3 th:text="${totalSkills}">0</h3>
+
+                        <p>Total Skills</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-award-fill"></i>
+
+                        <h3 th:text="${totalCertificates}">0</h3>
+
+                        <p>Certificates</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-envelope-fill"></i>
+
+                        <h3 th:text="${unreadMessages}">0</h3>
+
+                        <p>Unread Messages</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Statistics Row -->
+
+            <div class="row mt-4">
+
+                <div class="col-lg-4">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-eye-fill"></i>
+
+                        <h3 th:text="${totalVisitors}">0</h3>
+
+                        <p>Total Visitors</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-star-fill"></i>
+
+                        <h3 th:text="${featuredProjects}">0</h3>
+
+                        <p>Featured Projects</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="dashboard-card">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <h3 th:text="${publishedProjects}">0</h3>
+
+                        <p>Published Projects</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+			
+			            <!-- ================================= -->
+			            <!-- Recent Projects -->
+			            <!-- ================================= -->
+
+			            <div class="row mt-5">
+
+			                <div class="col-lg-8">
+
+			                    <div class="table-card">
+
+			                        <div class="d-flex justify-content-between mb-3">
+
+			                            <h4>
+
+			                                Recent Projects
+
+			                            </h4>
+
+			                            <a th:href="@{/admin/projects}"
+
+			                               class="btn btn-primary btn-sm">
+
+			                                View All
+
+			                            </a>
+
+			                        </div>
+
+			                        <table class="table table-dark table-hover">
+
+			                            <thead>
+
+			                            <tr>
+
+			                                <th>Title</th>
+
+			                                <th>Category</th>
+
+			                                <th>Status</th>
+
+			                                <th>Action</th>
+
+			                            </tr>
+
+			                            </thead>
+
+			                            <tbody>
+
+			                            <tr th:each="project : ${projects}">
+
+			                                <td th:text="${project.title}"></td>
+
+			                                <td th:text="${project.category}"></td>
+
+			                                <td>
+
+			                                    <span class="badge bg-success"
+
+			                                          th:if="${project.published}">
+
+			                                        Published
+
+			                                    </span>
+
+			                                    <span class="badge bg-warning"
+
+			                                          th:unless="${project.published}">
+
+			                                        Draft
+
+			                                    </span>
+
+			                                </td>
+
+			                                <td>
+
+			                                    <a th:href="@{'/admin/projects/edit/' + ${project.id}}"
+
+			                                       class="btn btn-sm btn-primary">
+
+			                                        Edit
+
+			                                    </a>
+
+			                                </td>
+
+			                            </tr>
+
+			                            </tbody>
+
+			                        </table>
+
+			                    </div>
+
+			                </div>
+
+			                <!-- ================================= -->
+			                <!-- Latest Messages -->
+			                <!-- ================================= -->
+
+			                <div class="col-lg-4">
+
+			                    <div class="table-card">
+
+			                        <h4 class="mb-3">
+
+			                            Latest Messages
+
+			                        </h4>
+
+			                        <div th:each="contact : ${contacts}"
+
+			                             class="message-item">
+
+			                            <h6 th:text="${contact.name}"></h6>
+
+			                            <small th:text="${contact.email}"></small>
+
+			                            <p class="mt-2"
+
+			                               th:text="${contact.subject}"></p>
+
+			                            <hr>
+
+			                        </div>
+
+			                    </div>
+
+			                </div>
+
+			            </div>
+
+			            <!-- ================================= -->
+			            <!-- Analytics -->
+			            <!-- ================================= -->
+
+			            <div class="row mt-5">
+
+			                <div class="col-lg-6">
+
+			                    <div class="table-card">
+
+			                        <h4>
+
+			                            Visitor Analytics
+
+			                        </h4>
+
+			                        <canvas id="visitorChart">
+
+			                        </canvas>
+
+			                    </div>
+
+			                </div>
+
+			                <div class="col-lg-6">
+
+			                    <div class="table-card">
+
+			                        <h4>
+
+			                            Project Analytics
+
+			                        </h4>
+
+			                        <canvas id="projectChart">
+
+			                        </canvas>
+
+			                    </div>
+
+			                </div>
+
+			            </div>
+
+			        </div>
+
+			    </main>
+
+			</div>
+
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+			<script>
+
+			const visitorChart = new Chart(
+
+			document.getElementById("visitorChart"),
+
+			{
+
+			type:"line",
+
+			data:{
+
+			labels:["Jan","Feb","Mar","Apr","May","Jun"],
+
+			datasets:[{
+
+			label:"Visitors",
+
+			data:[120,180,240,310,390,500],
+
+			borderColor:"#0d6efd",
+
+			fill:false
+
+			}]
+
+			}
+
+			});
+
+			const projectChart = new Chart(
+
+			document.getElementById("projectChart"),
+
+			{
+
+			type:"doughnut",
+
+			data:{
+
+			labels:["Published","Draft"],
+
+			datasets:[{
+
+			data:[70,30],
+
+			backgroundColor:[
+
+			"#198754",
+
+			"#ffc107"
+
+			]
+
+			}]
+
+			}
+
+			});
+
+			</script>
+
+			</body>
+
+			</html>

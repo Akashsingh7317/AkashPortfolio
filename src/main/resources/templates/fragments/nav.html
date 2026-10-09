@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<th:block th:fragment="assets">
+    <link rel="icon" th:href="${profile.avatarUrl}">
+    <meta name="theme-color" content="#07070a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+    <link rel="stylesheet" th:href="@{/css/portfolio.css}">
+</th:block>
+
+<header class="nav" id="nav" th:fragment="nav">
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <div class="container nav-inner">
+        <a th:href="@{/}" class="logo" aria-label="Home">
+            <th:block th:text="${#strings.arraySplit(profile.name, ' ')[0]}">Akash</th:block><span>.</span>
+        </a>
+
+        <nav class="nav-links" id="navLinks" aria-label="Main">
+            <a th:href="@{/#home}">Home</a>
+            <a th:href="@{/#about}">About</a>
+            <a th:href="@{/#expertise}">Expertise</a>
+            <a th:href="@{/#skills}">Skills</a>
+            <a th:href="@{/#projects}">Projects</a>
+            <a th:href="@{/#github}">GitHub</a>
+            <a th:href="@{/#contact}">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a th:href="@{/#contact}" class="btn btn-primary btn-sm hide-sm">Hire Me</a>
+            <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

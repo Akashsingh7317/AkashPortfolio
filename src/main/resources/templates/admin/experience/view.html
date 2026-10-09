@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>View Experience</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+
+            Experience Details
+
+        </h2>
+
+        <div>
+
+            <a th:href="@{/admin/experience}"
+
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back
+
+            </a>
+
+            <button class="btn btn-primary"
+
+                    onclick="window.print()">
+
+                <i class="bi bi-printer"></i>
+
+                Print
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-lg-8">
+
+                    <h2 th:text="${experience.designation}"></h2>
+
+                    <h5 class="text-primary"
+
+                        th:text="${experience.companyName}">
+
+                    </h5>
+
+                    <hr>
+
+                    <table class="table table-bordered">
+
+                        <tr>
+
+                            <th width="220">
+
+                                Company
+
+                            </th>
+
+                            <td th:text="${experience.companyName}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Designation
+
+                            </th>
+
+                            <td th:text="${experience.designation}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Employment Type
+
+                            </th>
+
+                            <td th:text="${experience.employmentType}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Location
+
+                            </th>
+
+                            <td th:text="${experience.location}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Start Date
+
+                            </th>
+
+                            <td th:text="${experience.startDate}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                End Date
+
+                            </th>
+
+                            <td>
+
+                                <span th:if="${experience.currentCompany}">
+
+                                    Present
+
+                                </span>
+
+                                <span th:unless="${experience.currentCompany}"
+
+                                      th:text="${experience.endDate}">
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Current Company
+
+                            </th>
+
+                            <td>
+
+                                <span class="badge bg-success"
+
+                                      th:if="${experience.currentCompany}">
+
+                                    Yes
+
+                                </span>
+
+                                <span class="badge bg-secondary"
+
+                                      th:unless="${experience.currentCompany}">
+
+                                    No
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Active
+
+                            </th>
+
+                            <td>
+
+                                <span class="badge bg-success"
+
+                                      th:if="${experience.active}">
+
+                                    Active
+
+                                </span>
+
+                                <span class="badge bg-danger"
+
+                                      th:unless="${experience.active}">
+
+                                    Inactive
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Featured
+
+                            </th>
+
+                            <td>
+
+                                <span class="badge bg-primary"
+
+                                      th:if="${experience.featured}">
+
+                                    Featured
+
+                                </span>
+
+                                <span class="badge bg-secondary"
+
+                                      th:unless="${experience.featured}">
+
+                                    No
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Display Order
+
+                            </th>
+
+                            <td th:text="${experience.displayOrder}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Created At
+
+                            </th>
+
+                            <td th:text="${experience.createdAt}"></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+
+                                Updated At
+
+                            </th>
+
+                            <td th:text="${experience.updatedAt}"></td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="card bg-light">
+
+                        <div class="card-body">
+
+                            <h5>
+
+                                Technologies
+
+                            </h5>
+
+                            <hr>
+
+                            <div th:if="${experience.technologies != null}">
+
+                                <span class="badge bg-primary m-1"
+
+                                      th:each="tech : ${#strings.arraySplit(experience.technologies, ',')}"
+
+                                      th:text="${tech.trim()}">
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <h4>
+
+                Roles & Responsibilities
+
+            </h4>
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <p style="white-space: pre-line;"
+
+                       th:text="${experience.description}">
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="text-end mt-4">
+
+                <a th:href="@{'/admin/experience/edit/' + ${experience.id}}"
+
+                   class="btn btn-warning">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    Edit Experience
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

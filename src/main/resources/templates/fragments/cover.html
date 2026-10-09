@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--
+    Product-style preview for a project card.
+    Uses the uploaded thumbnail when there is one; otherwise draws a
+    small UI mock-up that matches the project (chosen by slug).
+-->
+<div th:fragment="cover(project)" class="cover" th:data-slug="${project.slug}">
+
+    <img th:if="${!#strings.isEmpty(project.thumbnail)}" class="cover-shot"
+         th:src="@{'/uploads/' + ${project.thumbnail}}" th:alt="${project.title}" loading="lazy">
+
+    <div class="mock-window" th:if="${#strings.isEmpty(project.thumbnail)}" aria-hidden="true">
+        <div class="mw-bar">
+            <span></span><span></span><span></span>
+            <em th:text="${project.title}">Project</em>
+        </div>
+
+        <th:block th:switch="${project.slug}">
+
+            <!-- PDF RAG Agent: document chat -->
+            <div class="mw-body mw-split" th:case="'pdf-rag-agent'">
+                <aside class="mw-side">
+                    <b>Documents</b>
+                    <span class="mw-file active"><i class="fa-regular fa-file-pdf"></i> printer-manual.pdf</span>
+                    <span class="mw-file"><i class="fa-regular fa-file-word"></i> hr-policy.docx</span>
+                    <span class="mw-file"><i class="fa-regular fa-file-image"></i> receipt.jpg</span>
+                    <span class="mw-file"><i class="fa-regular fa-file-lines"></i> notes.txt</span>
+                </aside>
+                <div class="mw-main mw-chat">
+                    <div class="bubble q">What does error E07 mean?</div>
+                    <div class="bubble a">
+                        <i class="fa-solid fa-robot"></i>
+                        <div>E07 means the paper tray is jammed. Open tray 2 and remove the sheet.
+                            <span class="cite"><i class="fa-regular fa-file-pdf"></i> printer-manual.pdf · p. 12</span></div>
+                    </div>
+                    <div class="bubble q extra">Isme warranty kitne saal ki hai?</div>
+                    <div class="bubble a extra">
+                        <i class="fa-solid fa-robot"></i>
+                        <div>Warranty 2 saal ki hai, aur product register karne par 1 saal aur badh jaati hai.
+                            <span class="cite"><i class="fa-regular fa-file-pdf"></i> printer-manual.pdf · p. 31</span></div>
+                    </div>
+                    <div class="mw-input">Ask anything about your files… <i class="fa-solid fa-microphone"></i></div>
+                </div>
+            </div>
+
+            <!-- MMEP: institute dashboard -->
+            <div class="mw-body mw-split" th:case="'mmep-education-management'">
+                <aside class="mw-side mw-nav">
+                    <span class="active"><i class="fa-solid fa-gauge"></i> Dashboard</span>
+                    <span><i class="fa-solid fa-book"></i> Courses</span>
+                    <span><i class="fa-solid fa-users"></i> Batches</span>
+                    <span><i class="fa-solid fa-calendar-check"></i> Attendance</span>
+                    <span><i class="fa-solid fa-file-pen"></i> Tests</span>
+                </aside>
+                <div class="mw-main">
+                    <div class="mw-tiles">
+                        <div><small>Students</small><b>248</b></div>
+                        <div><small>Courses</small><b>18</b></div>
+                        <div><small>Attendance</small><b>94%</b></div>
+                    </div>
+                    <div class="mw-chart-title">Weekly attendance</div>
+                    <div class="mw-bars">
+                        <span style="height:62%"></span><span style="height:78%"></span><span style="height:70%"></span>
+                        <span style="height:88%"></span><span style="height:82%"></span><span style="height:94%"></span>
+                        <span style="height:58%"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NaukriHub: job search -->
+            <div class="mw-body" th:case="'naukrihub-job-portal'">
+                <div class="mw-main">
+                    <div class="mw-search">
+                        <span><i class="fa-solid fa-magnifying-glass"></i> Java Developer</span>
+                        <span><i class="fa-solid fa-location-dot"></i> Delhi NCR</span>
+                        <b>Search</b>
+                    </div>
+                    <div class="mw-job">
+                        <span class="mw-logo">TC</span>
+                        <div><b>Backend Engineer – Spring Boot</b><small>Noida · 2–5 yrs · Full time</small></div>
+                        <em class="pill-ok">Shortlisted</em>
+                    </div>
+                    <div class="mw-job">
+                        <span class="mw-logo alt">FS</span>
+                        <div><b>Full Stack Developer (Java + React)</b><small>Gurugram · 1–3 yrs · Hybrid</small></div>
+                        <em class="pill-btn">Apply</em>
+                    </div>
+                    <div class="mw-job">
+                        <span class="mw-logo alt2">DX</span>
+                        <div><b>Software Engineer I</b><small>Remote · 0–2 yrs</small></div>
+                        <em class="pill-btn">Apply</em>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio CMS: admin table -->
+            <div class="mw-body mw-split" th:case="'portfolio-cms'">
+                <aside class="mw-side mw-nav">
+                    <span><i class="fa-solid fa-gauge"></i> Dashboard</span>
+                    <span class="active"><i class="fa-solid fa-folder-open"></i> Projects</span>
+                    <span><i class="fa-solid fa-bolt"></i> Skills</span>
+                    <span><i class="fa-solid fa-envelope"></i> Messages</span>
+                </aside>
+                <div class="mw-main">
+                    <div class="mw-table-head"><b>Projects</b><em class="pill-btn">+ New</em></div>
+                    <div class="mw-row"><span>PDF RAG Agent</span><em class="pill-ok">Published</em><i class="toggle on"></i></div>
+                    <div class="mw-row"><span>NaukriHub</span><em class="pill-ok">Published</em><i class="toggle on"></i></div>
+                    <div class="mw-row"><span>MMEP</span><em class="pill-ok">Published</em><i class="toggle on"></i></div>
+                    <div class="mw-row"><span>New project</span><em class="pill-draft">Draft</em><i class="toggle"></i></div>
+                </div>
+            </div>
+
+            <!-- Health Monitor: metrics -->
+            <div class="mw-body" th:case="'health-monitor-portal'">
+                <div class="mw-main">
+                    <div class="mw-tiles">
+                        <div><small><i class="fa-solid fa-heart-pulse"></i> Heart rate</small><b>72 <i>bpm</i></b></div>
+                        <div><small><i class="fa-solid fa-droplet"></i> Blood pressure</small><b>120/80</b></div>
+                        <div><small><i class="fa-solid fa-weight-scale"></i> Weight</small><b>71 <i>kg</i></b></div>
+                    </div>
+                    <svg class="mw-line" viewBox="0 0 300 90" preserveAspectRatio="none">
+                        <polyline points="0,60 30,52 60,58 90,40 120,46 150,30 180,38 210,24 240,32 270,18 300,26"/>
+                        <polyline class="fill" points="0,60 30,52 60,58 90,40 120,46 150,30 180,38 210,24 240,32 270,18 300,26 300,90 0,90"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Any other project: code view -->
+            <div class="mw-body" th:case="*">
+                <pre class="mw-code"><span class="k">@RestController</span>
+<span class="k">public class</span> <span class="t" th:text="${#strings.replace(#strings.capitalizeWords(#strings.replace(project.slug, '-', ' ')), ' ', '')} + 'Api'">ProjectApi</span> {
+  <span class="c">// <th:block th:text="${project.category}">Full Stack</th:block></span>
+  <span class="k">@GetMapping</span>(<span class="s">"/health"</span>)
+  <span class="t">String</span> health() { <span class="k">return</span> <span class="s">"UP"</span>; }
+}</pre>
+            </div>
+
+        </th:block>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+/* ==========================================
+   Admin Panel Styles
+========================================== */
+
+body{
+    background:#f5f7fb;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#222;
+}
+
+.container,
+.container-fluid{
+    padding-top:20px;
+}
+
+.card{
+    border:none;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.card-header{
+    font-size:20px;
+    font-weight:600;
+}
+
+.table{
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.table th{
+    white-space:nowrap;
+    vertical-align:middle;
+}
+
+.table td{
+    vertical-align:middle;
+}
+
+.table img{
+    border-radius:8px;
+}
+
+.btn{
+    border-radius:8px;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.form-control,
+.form-select{
+    border-radius:8px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow:0 0 0 .2rem rgba(13,110,253,.2);
+}
+
+.progress{
+    height:22px;
+    border-radius:30px;
+    background:#ececec;
+}
+
+.progress-bar{
+    font-weight:bold;
+}
+
+.badge{
+    font-size:13px;
+    padding:8px 12px;
+}
+
+.img-thumbnail{
+    border-radius:12px;
+}
+
+.rounded-circle{
+    object-fit:cover;
+}
+
+.pagination .page-link{
+    color:#0d6efd;
+}
+
+.pagination .page-item.active .page-link{
+    background:#0d6efd;
+    border-color:#0d6efd;
+}
+
+.alert{
+    border-radius:8px;
+}
+
+textarea{
+    resize:vertical;
+}
+
+video{
+    border-radius:10px;
+    background:#000;
+}
+
+input[type=file]{
+    padding:8px;
+}
+
+.shadow{
+    box-shadow:0 6px 18px rgba(0,0,0,.15)!important;
+}
+
+.shadow-lg{
+    box-shadow:0 10px 30px rgba(0,0,0,.18)!important;
+}
+
+.text-primary{
+    font-weight:600;
+}
+
+.bg-primary{
+    background:#0d6efd!important;
+}
+
+.bg-success{
+    background:#198754!important;
+}
+
+.bg-warning{
+    background:#ffc107!important;
+    color:#000!important;
+}
+
+.bg-danger{
+    background:#dc3545!important;
+}
+
+.bg-dark{
+    background:#212529!important;
+}
+
+.card:hover{
+    transition:.3s;
+    transform:translateY(-2px);
+}
+
+.table-hover tbody tr:hover{
+    background:#f0f4ff;
+    color:#000;
+}
+
+input[type=range]{
+    cursor:pointer;
+}
+
+#iconPreview{
+    transition:.3s;
+}
+
+@media(max-width:992px){
+
+.table{
+    font-size:14px;
+}
+
+.card-header h3{
+    font-size:20px;
+}
+
+}
+
+@media(max-width:768px){
+
+.d-flex{
+    flex-direction:column;
+    gap:10px;
+}
+
+.btn{
+    width:100%;
+}
+
+.table{
+    font-size:13px;
+}
+
+}
+
+@media print{
+
+.btn,
+.pagination,
+form,
+input,
+select,
+textarea{
+    display:none!important;
+}
+
+body{
+    background:#fff;
+}
+
+.card{
+    box-shadow:none;
+}
+
+}

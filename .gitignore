@@ -1,0 +1,25 @@
+# Build output
+target/
+*.class
+*.log
+hs_err_pid*
+
+# Runtime uploads (images, resume, videos added through the admin panel)
+uploads/
+
+# IDE
+.settings/
+.classpath
+.project
+.factorypath
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+application-local.properties

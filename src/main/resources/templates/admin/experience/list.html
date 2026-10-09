@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Experience Management</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<div class="container-fluid mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>
+
+            Experience Management
+
+        </h2>
+
+        <a th:href="@{/admin/experience/add}"
+
+           class="btn btn-primary">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Add Experience
+
+        </a>
+
+    </div>
+
+    <!-- Search -->
+
+    <form method="get"
+
+          th:action="@{/admin/experience/search}"
+
+          class="row mb-4">
+
+        <div class="col-md-10">
+
+            <input type="text"
+
+                   class="form-control"
+
+                   name="keyword"
+
+                   placeholder="Search Company / Designation">
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button class="btn btn-success w-100">
+
+                <i class="bi bi-search"></i>
+
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- Success Messages -->
+
+    <div class="alert alert-success"
+
+         th:if="${param.success}">
+
+        Experience saved successfully.
+
+    </div>
+
+    <div class="alert alert-primary"
+
+         th:if="${param.updated}">
+
+        Experience updated successfully.
+
+    </div>
+
+    <div class="alert alert-danger"
+
+         th:if="${param.deleted}">
+
+        Experience deleted successfully.
+
+    </div>
+
+    <!-- Experience Table -->
+
+    <div class="table-responsive">
+
+        <table class="table table-hover table-dark align-middle">
+
+            <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Company</th>
+
+                <th>Designation</th>
+
+                <th>Duration</th>
+
+                <th>Location</th>
+
+                <th>Current</th>
+
+                <th>Status</th>
+
+                <th>Featured</th>
+
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="experience : ${experiences}">
+
+                <td th:text="${experience.id}"></td>
+
+                <td>
+
+                    <strong
+
+                            th:text="${experience.companyName}">
+
+                    </strong>
+
+                </td>
+
+                <td
+
+                        th:text="${experience.designation}">
+
+                </td>
+
+                <td>
+
+                    <span th:text="${experience.startDate}"></span>
+
+                    -
+
+                    <span th:if="${experience.currentCompany}">
+
+                        Present
+
+                    </span>
+
+                    <span th:unless="${experience.currentCompany}"
+
+                          th:text="${experience.endDate}">
+
+                    </span>
+
+                </td>
+
+                <td
+
+                        th:text="${experience.location}">
+
+                </td>
+
+                <td>
+
+                    <span class="badge bg-success"
+
+                          th:if="${experience.currentCompany}">
+
+                        Yes
+
+                    </span>
+
+                    <span class="badge bg-secondary"
+
+                          th:unless="${experience.currentCompany}">
+
+                        No
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="badge bg-success"
+
+                          th:if="${experience.active}">
+
+                        Active
+
+                    </span>
+
+                    <span class="badge bg-danger"
+
+                          th:unless="${experience.active}">
+
+                        Inactive
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="badge bg-primary"
+
+                          th:if="${experience.featured}">
+
+                        Featured
+
+                    </span>
+
+                    <span class="badge bg-secondary"
+
+                          th:unless="${experience.featured}">
+
+                        No
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <a th:href="@{'/admin/experience/view/' + ${experience.id}}"
+
+                       class="btn btn-sm btn-info">
+
+                        <i class="bi bi-eye-fill"></i>
+
+                    </a>
+
+                    <a th:href="@{'/admin/experience/edit/' + ${experience.id}}"
+
+                       class="btn btn-sm btn-warning">
+
+                        <i class="bi bi-pencil-square"></i>
+
+                    </a>
+
+                    <a th:href="@{'/admin/experience/delete/' + ${experience.id}}"
+
+                       class="btn btn-sm btn-danger"
+
+                       onclick="return confirm('Delete this experience?')">
+
+                        <i class="bi bi-trash-fill"></i>
+
+                    </a>
+
+                    <a th:if="${experience.active}"
+
+                       th:href="@{'/admin/experience/deactivate/' + ${experience.id}}"
+
+                       class="btn btn-sm btn-secondary">
+
+                        Deactivate
+
+                    </a>
+
+                    <a th:unless="${experience.active}"
+
+                       th:href="@{'/admin/experience/activate/' + ${experience.id}}"
+
+                       class="btn btn-sm btn-success">
+
+                        Activate
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <nav class="mt-4">
+
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item"
+
+                th:each="i : ${#numbers.sequence(1,totalPages)}">
+
+                <a class="page-link"
+
+                   th:text="${i}"
+
+                   th:href="@{'/admin/experience/page/' + ${i}}">
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
