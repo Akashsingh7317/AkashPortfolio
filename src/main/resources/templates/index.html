@@ -152,9 +152,38 @@
             <h2 class="section-title">Technologies I Work With</h2>
             <p>Full-stack expertise across modern web development, artificial intelligence and DevOps tooling.</p>
         </div>
+
+        <div class="skills-3d">
+            <div class="globe-wrap reveal">
+                <div class="skill-globe" id="skillGlobe">
+                    <div class="globe-shell" aria-hidden="true">
+                        <span class="gr g1"></span><span class="gr g2"></span><span class="gr g3"></span><span class="gr g4"></span>
+                        <span class="globe-core"></span>
+                    </div>
+                </div>
+                <p class="globe-hint"><i class="fa-solid fa-hand-pointer"></i> Drag to spin · click a skill</p>
+            </div>
+
+            <div class="skill-panel reveal">
+                <div class="skill-tabs" id="skillTabs" role="tablist" aria-label="Skill categories"></div>
+                <div class="skill-grid" id="skillGrid">
+                    <div class="skill-card" th:each="skill : ${skillList}" data-tilt
+                         th:data-cat="${skill.category}" th:data-name="${skill.skillName}"
+                         th:with="p=${skill.percentage != null ? skill.percentage : 70}"
+                         th:style="${'--p:' + p + '%'}">
+                        <span class="skill-icon"><i th:class="${skill.icon}"></i></span>
+                        <span class="skill-text">
+                            <strong th:text="${skill.skillName}">Java</strong>
+                            <small th:text="${p >= 85 ? 'Advanced' : (p >= 75 ? 'Proficient' : 'Working knowledge')}">Advanced</small>
+                        </span>
+                        <span class="skill-meter" aria-hidden="true"><span></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="tech-rows reveal">
+    <div class="tech-rows tilted reveal" aria-hidden="true">
         <div class="tech-row" th:each="row : ${#numbers.sequence(0, 1)}" th:classappend="${row == 1} ? 'reverse'">
             <ul class="tech-track" th:each="copy : ${#numbers.sequence(1, 2)}" th:attr="aria-hidden=${copy == 2}">
                 <th:block th:each="skill, st : ${skillList}">
@@ -177,50 +206,96 @@
         </div>
 
         <div class="roadmap">
-            <article class="road-card glass reveal">
-                <span class="road-num">// Root 01</span>
-                <h3>Backend Engineering</h3>
-                <p>Secure, well-structured Spring Boot services.</p>
-                <ul>
-                    <li>REST API design</li>
-                    <li>Spring Security &amp; JWT</li>
-                    <li>JPA on MySQL / PostgreSQL</li>
-                </ul>
-                <span class="tag">Java &amp; Spring Boot</span>
-            </article>
-            <article class="road-card glass reveal">
-                <span class="road-num">// Root 02</span>
-                <h3>Full-Stack Development</h3>
-                <p>Complete products with dashboards and role-based portals.</p>
-                <ul>
-                    <li>React single-page apps</li>
-                    <li>Thymeleaf interfaces</li>
-                    <li>Admin panels &amp; CMS</li>
-                </ul>
-                <span class="tag">React &amp; Thymeleaf</span>
-            </article>
-            <article class="road-card glass reveal">
-                <span class="road-num">// Root 03</span>
-                <h3>AI &amp; Machine Learning</h3>
-                <p>LLM features grounded in your own data.</p>
-                <ul>
-                    <li>RAG document assistants</li>
-                    <li>LangChain &amp; vector DBs</li>
-                    <li>Measured with evaluation</li>
-                </ul>
-                <span class="tag">Python &amp; LLMs</span>
-            </article>
-            <article class="road-card glass reveal">
-                <span class="road-num">// Root 04</span>
-                <h3>Deployment &amp; DevOps</h3>
-                <p>Code that is ready for production, not just a demo.</p>
-                <ul>
-                    <li>Docker &amp; Compose</li>
-                    <li>GitHub Actions CI</li>
-                    <li>Automated testing</li>
-                </ul>
-                <span class="tag">Docker &amp; CI/CD</span>
-            </article>
+            <div class="road-track" aria-hidden="true"><span class="road-pulse"></span></div>
+
+            <div class="road-item reveal" style="--c:#a5a1ff; --i:0">
+                <article class="road-card" data-tilt>
+                    <span class="road-node" aria-hidden="true"></span>
+                    <div class="road-head">
+                        <div class="cube" aria-hidden="true">
+                            <span class="f1"><i class="fa-solid fa-server"></i></span><span class="f2"><i class="fa-solid fa-server"></i></span>
+                            <span class="f3"><i class="fa-solid fa-server"></i></span><span class="f4"><i class="fa-solid fa-server"></i></span>
+                            <span class="f5"></span><span class="f6"></span>
+                        </div>
+                        <span class="road-num">// Root 01</span>
+                    </div>
+                    <h3>Backend Engineering</h3>
+                    <p>Secure, well-structured Spring Boot services.</p>
+                    <ul>
+                        <li>REST API design</li>
+                        <li>Spring Security &amp; JWT</li>
+                        <li>JPA on MySQL / PostgreSQL</li>
+                    </ul>
+                    <span class="tag">Java &amp; Spring Boot</span>
+                    <span class="road-big" aria-hidden="true">01</span>
+                </article>
+            </div>
+            <div class="road-item reveal" style="--c:#67e8f9; --i:1">
+                <article class="road-card" data-tilt>
+                    <span class="road-node" aria-hidden="true"></span>
+                    <div class="road-head">
+                        <div class="cube" aria-hidden="true">
+                            <span class="f1"><i class="fa-solid fa-layer-group"></i></span><span class="f2"><i class="fa-solid fa-layer-group"></i></span>
+                            <span class="f3"><i class="fa-solid fa-layer-group"></i></span><span class="f4"><i class="fa-solid fa-layer-group"></i></span>
+                            <span class="f5"></span><span class="f6"></span>
+                        </div>
+                        <span class="road-num">// Root 02</span>
+                    </div>
+                    <h3>Full-Stack Development</h3>
+                    <p>Complete products with dashboards and role-based portals.</p>
+                    <ul>
+                        <li>React single-page apps</li>
+                        <li>Thymeleaf interfaces</li>
+                        <li>Admin panels &amp; CMS</li>
+                    </ul>
+                    <span class="tag">React &amp; Thymeleaf</span>
+                    <span class="road-big" aria-hidden="true">02</span>
+                </article>
+            </div>
+            <div class="road-item reveal" style="--c:#f0abfc; --i:2">
+                <article class="road-card" data-tilt>
+                    <span class="road-node" aria-hidden="true"></span>
+                    <div class="road-head">
+                        <div class="cube" aria-hidden="true">
+                            <span class="f1"><i class="fa-solid fa-brain"></i></span><span class="f2"><i class="fa-solid fa-brain"></i></span>
+                            <span class="f3"><i class="fa-solid fa-brain"></i></span><span class="f4"><i class="fa-solid fa-brain"></i></span>
+                            <span class="f5"></span><span class="f6"></span>
+                        </div>
+                        <span class="road-num">// Root 03</span>
+                    </div>
+                    <h3>AI &amp; Machine Learning</h3>
+                    <p>LLM features grounded in your own data.</p>
+                    <ul>
+                        <li>RAG document assistants</li>
+                        <li>LangChain &amp; vector DBs</li>
+                        <li>Measured with evaluation</li>
+                    </ul>
+                    <span class="tag">Python &amp; LLMs</span>
+                    <span class="road-big" aria-hidden="true">03</span>
+                </article>
+            </div>
+            <div class="road-item reveal" style="--c:#6ee7b7; --i:3">
+                <article class="road-card" data-tilt>
+                    <span class="road-node" aria-hidden="true"></span>
+                    <div class="road-head">
+                        <div class="cube" aria-hidden="true">
+                            <span class="f1"><i class="fa-solid fa-rocket"></i></span><span class="f2"><i class="fa-solid fa-rocket"></i></span>
+                            <span class="f3"><i class="fa-solid fa-rocket"></i></span><span class="f4"><i class="fa-solid fa-rocket"></i></span>
+                            <span class="f5"></span><span class="f6"></span>
+                        </div>
+                        <span class="road-num">// Root 04</span>
+                    </div>
+                    <h3>Deployment &amp; DevOps</h3>
+                    <p>Code that is ready for production, not just a demo.</p>
+                    <ul>
+                        <li>Docker &amp; Compose</li>
+                        <li>GitHub Actions CI</li>
+                        <li>Automated testing</li>
+                    </ul>
+                    <span class="tag">Docker &amp; CI/CD</span>
+                    <span class="road-big" aria-hidden="true">04</span>
+                </article>
+            </div>
         </div>
     </div>
 </section>
@@ -236,41 +311,51 @@
     </div>
 
     <div class="carousel reveal" th:if="${!#lists.isEmpty(projects)}">
-        <div class="carousel-track" id="carouselTrack">
-            <article class="project-card glass" th:each="project, iter : ${projects}">
-                <div class="project-top">
-                    <span class="project-num" th:text="${'// Project ' + #numbers.formatInteger(iter.count, 2)}">// Project 01</span>
-                    <span class="tag" th:text="${project.category}">Full Stack</span>
-                </div>
+        <div class="coverflow" id="carouselTrack" tabindex="0" aria-roledescription="carousel" aria-label="Featured projects">
+            <article class="project-card" th:each="project, iter : ${projects}">
+                <div class="pc-inner" data-tilt>
+                    <div class="project-media">
+                        <div th:replace="~{fragments/cover :: cover(${project})}"></div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-top">
+                            <span class="project-num" th:text="${'// Project ' + #numbers.formatInteger(iter.count, 2)}">// Project 01</span>
+                            <span class="tag" th:text="${project.category}">Full Stack</span>
+                        </div>
 
-                <h3><a th:href="@{'/project/' + ${project.slug}}" th:text="${project.title}">Project</a></h3>
+                        <h3><a th:href="@{'/project/' + ${project.slug}}" th:text="${project.title}">Project</a></h3>
 
-                <span class="project-featured" th:if="${project.featured}"><i class="fa-solid fa-star"></i> Featured</span>
-                <p class="project-desc" th:text="${project.shortDescription}">Description</p>
+                        <span class="project-featured" th:if="${project.featured}"><i class="fa-solid fa-star"></i> Featured</span>
+                        <p class="project-desc" th:text="${project.shortDescription}">Description</p>
 
-                <ul class="tech" th:if="${project.technologies}">
-                    <li th:each="t, ts : ${#strings.arraySplit(project.technologies, ',')}"
-                        th:if="${ts.index < 4}" th:text="${#strings.trim(t)}">Java</li>
-                    <li class="more"
-                        th:with="n=${#arrays.length(#strings.arraySplit(project.technologies, ','))}"
-                        th:if="${n > 4}" th:text="${'+' + (n - 4)}">+3</li>
-                </ul>
+                        <ul class="tech" th:if="${project.technologies}">
+                            <li th:each="t, ts : ${#strings.arraySplit(project.technologies, ',')}"
+                                th:if="${ts.index < 4}" th:text="${#strings.trim(t)}">Java</li>
+                            <li class="more"
+                                th:with="n=${#arrays.length(#strings.arraySplit(project.technologies, ','))}"
+                                th:if="${n > 4}" th:text="${'+' + (n - 4)}">+3</li>
+                        </ul>
 
-                <div class="project-foot">
-                    <a th:href="@{'/project/' + ${project.slug}}" class="link">Case study <i class="fa-solid fa-arrow-right"></i></a>
-                    <a th:if="${!#strings.isEmpty(project.githubUrl)}" th:href="${project.githubUrl}"
-                       target="_blank" rel="noopener" class="code-link"><i class="fa-brands fa-github"></i> Code ↗</a>
-                    <a th:if="${!#strings.isEmpty(project.liveUrl)}" th:href="${project.liveUrl}"
-                       target="_blank" rel="noopener" class="code-link">Live ↗</a>
+                        <div class="project-foot">
+                            <a th:href="@{'/project/' + ${project.slug}}" class="link">Case study <i class="fa-solid fa-arrow-right"></i></a>
+                            <a th:if="${!#strings.isEmpty(project.githubUrl)}" th:href="${project.githubUrl}"
+                               target="_blank" rel="noopener" class="code-link"><i class="fa-brands fa-github"></i> Code ↗</a>
+                            <a th:if="${!#strings.isEmpty(project.liveUrl)}" th:href="${project.liveUrl}"
+                               target="_blank" rel="noopener" class="code-link">Live ↗</a>
+                        </div>
+                    </div>
                 </div>
             </article>
         </div>
+        <div class="coverflow-floor" aria-hidden="true"></div>
 
         <button class="carousel-arrow prev" id="carouselPrev" type="button" aria-label="Previous project"><i class="fa-solid fa-chevron-left"></i></button>
         <button class="carousel-arrow next" id="carouselNext" type="button" aria-label="Next project"><i class="fa-solid fa-chevron-right"></i></button>
 
         <div class="carousel-nav">
+            <span class="carousel-count" id="carouselCount" aria-live="polite">01 / 05</span>
             <div class="carousel-dots" id="carouselDots"></div>
+            <span class="carousel-hint"><i class="fa-solid fa-arrows-left-right"></i> Drag or use arrow keys</span>
         </div>
     </div>
 
@@ -286,24 +371,44 @@
             <p>Loaded straight from the GitHub API — new repositories appear here automatically.</p>
         </div>
 
-        <div class="gh-overview glass reveal">
-            <a class="gh-profile" th:href="${profile.githubUrl}" target="_blank" rel="noopener">
-                <img th:src="${profile.avatarUrl}" alt="" class="gh-avatar">
-                <div>
-                    <strong th:text="${profile.name}">Akash Singh</strong>
-                    <span th:text="${'@' + profile.githubUsername}">@Akashsingh7317</span>
+        <div class="gh-bento">
+            <div class="gh-item reveal">
+                <div class="gh-card gh-me" data-tilt>
+                    <a class="gh-profile" th:href="${profile.githubUrl}" target="_blank" rel="noopener">
+                        <span class="gh-avatar-ring"><img th:src="${profile.avatarUrl}" alt="" class="gh-avatar"></span>
+                        <span class="gh-who">
+                            <strong th:text="${profile.name}">Akash Singh</strong>
+                            <span th:text="${'@' + profile.githubUsername}">@Akashsingh7317</span>
+                        </span>
+                        <span class="gh-follow">View profile <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    </a>
+                    <div class="gh-numbers">
+                        <div><strong data-gh-stat="repos">–</strong><span>Repositories</span></div>
+                        <div><strong data-gh-stat="languages">–</strong><span>Languages</span></div>
+                        <div><strong data-gh-stat="updated">–</strong><span>Last push</span></div>
+                    </div>
+                    <div class="gh-recent">
+                        <span class="gh-recent-label"><span class="dot"></span> Recent pushes</span>
+                        <ul id="ghRecent"><li class="skeleton" style="height:38px;border-radius:12px"></li></ul>
+                    </div>
                 </div>
-            </a>
-            <div class="gh-numbers">
-                <div><strong data-gh-stat="repos">–</strong><span>Repositories</span></div>
-                <div><strong data-gh-stat="languages">–</strong><span>Languages</span></div>
-                <div><strong data-gh-stat="updated">–</strong><span>Last update</span></div>
             </div>
-            <div class="lang-wrap">
-                <div class="lang-bar" id="langBar" aria-label="Languages across repositories"></div>
-                <ul class="lang-legend" id="langLegend"></ul>
+            <div class="gh-item reveal" style="--i:1">
+                <div class="gh-card gh-langs" data-tilt>
+                    <span class="gh-card-label">// Language mix</span>
+                    <div class="donut-stage">
+                        <div class="donut3d" id="langDonut" aria-hidden="true"></div>
+                        <div class="donut-center"><strong data-gh-stat="languages">–</strong><span>languages</span></div>
+                    </div>
+                    <ul class="lang-legend" id="langLegend" aria-label="Languages across repositories"></ul>
+                </div>
             </div>
         </div>
+
+        <ul id="repoNotes" hidden>
+            <li th:each="p : ${projects}" th:if="${!#strings.isEmpty(p.githubUrl)}"
+                th:data-url="${#strings.toLowerCase(p.githubUrl)}" th:text="${p.shortDescription}"></li>
+        </ul>
 
         <div class="repo-grid" id="repoGrid">
             <div class="repo-card skeleton"></div>
@@ -375,29 +480,69 @@
 
 <!-- ================= CONTACT ================= -->
 <section id="contact" class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="label">// Live dispatch node</span>
+            <h2 class="section-title">Let's Build Something Exceptional.</h2>
+            <p>Have a role, a project or an AI idea? Type it in and watch your message compile on the left.</p>
+        </div>
+    </div>
+
     <div class="container contact-grid">
-        <div class="dispatch glass reveal">
-            <div class="dispatch-top"><span>// Live dispatch node</span><span class="status">Online</span></div>
-            <h2>Let's Build Something Exceptional.</h2>
-            <p>Fill out the transmission form or preview your payload stream directly below.</p>
+        <div class="contact-side reveal">
+            <div class="dispatch-row">
+                <div class="contact-orb" aria-hidden="true">
+                    <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+                    <span class="core"><i class="fa-solid fa-paper-plane"></i></span>
+                </div>
+                <div class="dispatch-info">
+                    <small>// Local time · <span th:text="${profile.location}">New Delhi, India</span></small>
+                    <strong class="ist-clock" data-format="short">IST</strong>
+                    <span class="status">Online · open to opportunities</span>
+                </div>
+            </div>
 
-            <pre class="payload" id="payload" aria-live="polite"><span class="c">// payload_preview.json</span>
-{
-  <span class="k">"sender"</span>:  <span class="s empty-val" data-field="name">"[Awaiting Name]"</span>,
-  <span class="k">"email"</span>:   <span class="s empty-val" data-field="email">"[Awaiting Email]"</span>,
-  <span class="k">"subject"</span>: <span class="s empty-val" data-field="subject">"[Awaiting Subject]"</span>,
-  <span class="k">"message"</span>: <span class="s empty-val" data-field="message">"[Awaiting Message]"</span>
-}</pre>
+            <div class="editor" data-tilt>
+                <div class="editor-bar">
+                    <span class="lights"><i></i><i></i><i></i></span>
+                    <span class="editor-file"><i class="fa-regular fa-file-code"></i> payload_preview.json</span>
+                    <span class="status">Live preview</span>
+                </div>
+                <pre class="payload" id="payload" aria-live="polite"><span class="ln">1</span>{
+<span class="ln">2</span>  <span class="k">"sender"</span>:  <span class="s empty-val" data-field="name">"[Awaiting Name]"</span>,
+<span class="ln">3</span>  <span class="k">"email"</span>:   <span class="s empty-val" data-field="email">"[Awaiting Email]"</span>,
+<span class="ln">4</span>  <span class="k">"subject"</span>: <span class="s empty-val" data-field="subject">"[Awaiting Subject]"</span>,
+<span class="ln">5</span>  <span class="k">"message"</span>: <span class="s empty-val" data-field="message">"[Awaiting Message]"</span>
+<span class="ln">6</span>}<span class="caret"></span></pre>
+            </div>
 
-            <ul class="contact-list">
-                <li><i class="fa-solid fa-envelope"></i><a th:href="${'mailto:' + profile.email}" th:text="${profile.email}">email</a></li>
-                <li th:if="${!#strings.isEmpty(profile.phone)}"><i class="fa-solid fa-phone"></i><a th:href="${'tel:' + #strings.replace(profile.phone, ' ', '')}" th:text="${profile.phone}">phone</a></li>
-                <li th:if="${!#strings.isEmpty(profile.linkedinUrl)}"><i class="fa-brands fa-linkedin-in"></i><a th:href="${profile.linkedinUrl}" target="_blank" rel="noopener" th:text="${'linkedin.com' + #strings.substringAfter(profile.linkedinUrl, 'linkedin.com')}">linkedin</a></li>
-                <li><i class="fa-solid fa-location-dot"></i><span th:text="${profile.location}">New Delhi, India</span></li>
-            </ul>
+            <div class="contact-tiles">
+                <div class="ctile wide" data-tilt>
+                    <span class="ctile-icon"><i class="fa-solid fa-envelope"></i></span>
+                    <span class="ctile-text"><small>Email</small><a th:href="${'mailto:' + profile.email}" th:text="${profile.email}">email</a></span>
+                    <button type="button" class="copy-btn" th:data-copy="${profile.email}" aria-label="Copy email"><i class="fa-regular fa-copy"></i></button>
+                </div>
+                <div class="ctile" data-tilt th:if="${!#strings.isEmpty(profile.phone)}">
+                    <span class="ctile-icon"><i class="fa-solid fa-phone"></i></span>
+                    <span class="ctile-text"><small>Phone</small><a th:href="${'tel:' + #strings.replace(profile.phone, ' ', '')}" th:text="${profile.phone}">phone</a></span>
+                    <button type="button" class="copy-btn" th:data-copy="${profile.phone}" aria-label="Copy phone number"><i class="fa-regular fa-copy"></i></button>
+                </div>
+                <div class="ctile" data-tilt th:if="${!#strings.isEmpty(profile.linkedinUrl)}">
+                    <span class="ctile-icon"><i class="fa-brands fa-linkedin-in"></i></span>
+                    <span class="ctile-text"><small>LinkedIn</small><a th:href="${profile.linkedinUrl}" target="_blank" rel="noopener" th:text="${'linkedin.com' + #strings.substringAfter(profile.linkedinUrl, 'linkedin.com')}">linkedin</a></span>
+                </div>
+                <div class="ctile wide" data-tilt>
+                    <span class="ctile-icon"><i class="fa-solid fa-location-dot"></i></span>
+                    <span class="ctile-text"><small>Based in</small><span th:text="${profile.location}">New Delhi, India</span></span>
+                </div>
+            </div>
         </div>
 
-        <form th:action="@{/contact/send}" method="post" th:object="${contact}" class="contact-form glass reveal" id="contactForm" novalidate>
+        <form th:action="@{/contact/send}" method="post" th:object="${contact}" class="contact-form reveal" id="contactForm" novalidate>
+            <div class="form-head">
+                <span class="form-title"><i class="fa-solid fa-terminal"></i> compose_message</span>
+                <span class="form-steps" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
 
             <div class="alert success" th:if="${contactSent}">
                 <i class="fa-solid fa-circle-check"></i> Transmission received — I'll get back to you soon.
@@ -432,15 +577,15 @@
                     <small class="err" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></small>
                 </label>
             </div>
-            <label>
+            <label class="grow">
                 <span>Message</span>
                 <textarea th:field="*{message}" rows="6" placeholder="Type your message here…" required maxlength="3000"
                           th:classappend="${#fields.hasErrors('message')} ? 'invalid'"></textarea>
                 <small class="err" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></small>
             </label>
 
-            <button type="submit" class="btn btn-primary btn-block">
-                Transmit Message <i class="fa-solid fa-arrow-right"></i>
+            <button type="submit" class="btn btn-primary btn-block btn-send">
+                <span>Transmit Message</span> <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
     </div>

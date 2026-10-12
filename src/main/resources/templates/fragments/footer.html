@@ -19,22 +19,10 @@
         </div>
 
         <div class="footer-grid">
-            <div>
-                <h4>// System Architecture</h4>
-                <div>Full-Stack Web Engineering</div>
-                <div>Java · Spring Boot · React</div>
-                <div>AI &amp; Machine Learning Solutions</div>
-            </div>
-            <div class="center">
-                <h4>// Status</h4>
-                <div class="ok"><span class="dot"></span> Open to Opportunities</div>
-                <div><a th:href="@{/#projects}">View Work ↗</a></div>
-                <div><a th:href="${'mailto:' + profile.email}" th:text="${profile.email}">email</a></div>
-            </div>
-            <div class="right">
-                <h4>// Region</h4>
-                <div th:text="${profile.location}">New Delhi, India</div>
-                <div>IST (UTC+5:30)</div>
+            <div class="footer-brand">
+                <a th:href="@{/}" class="logo"><th:block th:text="${#strings.arraySplit(profile.name, ' ')[0]}">Akash</th:block><span>.</span></a>
+                <p><span th:text="${profile.role}">Java Full Stack &amp; AI/ML Developer</span> building secure backends,
+                    clean frontends and AI apps grounded in real data.</p>
                 <div class="socials">
                     <a th:href="${profile.githubUrl}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                     <a th:if="${!#strings.isEmpty(profile.linkedinUrl)}" th:href="${profile.linkedinUrl}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -42,15 +30,41 @@
                     <a th:href="${'mailto:' + profile.email}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
+            <nav class="footer-col" aria-label="Footer">
+                <h4>// Navigate</h4>
+                <a th:href="@{/#about}">About</a>
+                <a th:href="@{/#expertise}">Expertise</a>
+                <a th:href="@{/#projects}">Projects</a>
+                <a th:href="@{/#github}">GitHub</a>
+                <a th:href="@{/#contact}">Contact</a>
+            </nav>
+            <div class="footer-col">
+                <h4>// Status</h4>
+                <div class="ok"><span class="dot"></span> Open to Opportunities</div>
+                <a th:href="${'mailto:' + profile.email}" th:text="${profile.email}">email</a>
+                <a th:href="@{/#projects}">View Work ↗</a>
+            </div>
+            <div class="footer-col">
+                <h4>// Region</h4>
+                <div th:text="${profile.location}">New Delhi, India</div>
+                <div class="footer-clock"><i class="fa-regular fa-clock"></i> <span class="ist-clock">IST (UTC+5:30)</span></div>
+            </div>
         </div>
+    </div>
 
-        <div class="footer-giant" aria-hidden="true" th:text="${profile.name}">Akash Singh</div>
+    <div class="footer-stage" id="footerStage" aria-hidden="true">
+        <div class="footer-floor"></div>
+        <div class="footer-giant" id="footerGiant">
+            <span class="fg-depth" th:text="${profile.name}">Akash Singh</span>
+            <span class="fg-face" th:text="${profile.name}">Akash Singh</span>
+        </div>
     </div>
 
     <div class="container footer-bottom">
         <span>© <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2026</span>
             <span th:text="${profile.name}">Akash Singh</span>. All rights reserved.</span>
         <span>Built with Java · Spring Boot · Thymeleaf</span>
+        <a href="#" class="to-top" id="toTop">Back to top <i class="fa-solid fa-arrow-up"></i></a>
     </div>
 </footer>
 
